@@ -1,0 +1,78 @@
+<% if user_signed_in? %>
+  <h1>My Items</h1>
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Medium</th>
+        <th>Platform</th>
+        <th>Lended To</th>
+        <th colspan='1'></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @user_items.each do |item| %>
+        <tr>
+          <td><%= link_to item.name, item %></td>
+          <td><%= item.medium %></td>
+          <td><%= item.platform %></td>
+          <td>
+            <% if item.current_borrow %>
+              <%= item.current_borrow.borrower.email %>
+              (<%= time_ago_in_words(item.current_borrow.created_at) %> ago)
+              <%= link_to 'Mark as Returned', nil %>
+            <% end %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+
+  <h1>Borrowed Items</h1>
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Medium</th>
+        <th>Platform</th>
+        <th>Borrowed From</th>
+        <th colspan='1'></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @borrowed_items.each do |item| %>
+        <tr>
+          <td><%= link_to item.name, item %></td>
+          <td><%= item.medium %></td>
+          <td><%= item.platform %></td>
+          <td>
+            <%= item.current_borrow.lender.email %>
+            (<%= time_ago_in_words(item.current_borrow.created_at) %> ago)
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% end %>
+
+<h1>Available Items</h1>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Medium</th>
+      <th>Platform</th>
+      <th colspan='1'></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @available_items.each do |item| %>
+      <tr>
+        <td><%= link_to item.name, item %></td>
+        <td><%= item.medium %></td>
+        <td><%= item.platform %></td>
+        <td><%= link_to 'Borrow', nil %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

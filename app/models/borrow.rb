@@ -21,4 +21,8 @@ class Borrow
       errors.add "You have to list a #{item.medium} before borrowing one"
     end
   end
+
+  def returned?
+    !!self.returned_at
+  end
 end

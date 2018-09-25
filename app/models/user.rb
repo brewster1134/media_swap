@@ -25,11 +25,11 @@ class User
 
   validates :email, uniqueness: true
 
-  def self.current_user=(user)
-    Thread.current[:current_user] = user
+  def admin?
+    self == User.first
   end
 
-  def self.current_user
-    Thread.current[:current_user]
+  def current_borrows
+    self.borrowed.select { |b| !b.returned? }.map(&:item)
   end
 end
