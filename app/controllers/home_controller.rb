@@ -1,11 +1,4 @@
 class HomeController < ApplicationController
-  @@mediums = [:book, :game, :movie]
-  @@platforms = {
-    book: [:ebook, :paper],
-    game: [:ps4, :xbox, :switch, :pc],
-    movie: [:dvd, :bluray],
-  }
-
   def index
     skip_authorization
 

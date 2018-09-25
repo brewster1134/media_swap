@@ -18,12 +18,12 @@
 
   <div class="field">
     <%= form.label :medium %>
-    <%= form.text_field :medium %>
+    <%= form.select :medium, ItemsHelper.mediums %>
   </div>
 
   <div class="field">
     <%= form.label :platform %>
-    <%= form.text_field :platform %>
+    <%= form.select :platform, ItemsHelper.platforms %>
   </div>
 
   <div class="field">

@@ -2,7 +2,9 @@
   "name": "media_swap",
   "private": true,
   "dependencies": {
-    "@rails/webpacker": "3.5"
+    "@rails/webpacker": "3.5",
+    "jquery": "^3.3.1",
+    "jquery-ujs": "^1.2.2"
   },
   "devDependencies": {
     "webpack-dev-server": "2.11.2"

@@ -1,7 +1,9 @@
 class ItemsController < ApplicationController
+  include ItemsHelper
   before_action :set_item, only: [:show, :edit, :update, :destroy]
 
   def index
+    skip_authorization
     @items = policy_scope(Item).all
   end
 
@@ -9,6 +11,7 @@ class ItemsController < ApplicationController
   end
 
   def new
+    skip_authorization
     @item = policy_scope(Item).new
   end
 
@@ -16,7 +19,9 @@ class ItemsController < ApplicationController
   end
 
   def create
+    skip_authorization
     @item = policy_scope(Item).new(item_params)
+    @item.user = current_user
 
     if @item.save
       redirect_to @item, notice: 'Item was successfully created.'
@@ -26,9 +31,10 @@ class ItemsController < ApplicationController
   end
 
   def update
+    @item.user = current_user
+
     if @item.update(item_params)
       redirect_to @item, notice: 'Item was successfully updated.'
-      format.json { render :show, status: :ok, location: @item }
     else
       render :edit
     end
@@ -42,6 +48,7 @@ class ItemsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_item
+      skip_authorization
       @item = policy_scope(Item).find(params[:id])
     end
 
