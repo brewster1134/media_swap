@@ -20,7 +20,7 @@
             <% if item.current_borrow %>
               <%= item.current_borrow.borrower.email %>
               (<%= time_ago_in_words(item.current_borrow.created_at) %> ago)
-              <%= link_to 'Mark as Returned', nil %>
+              <%= link_to 'Mark as Returned', item_return_path(item) %>
             <% end %>
           </td>
         </tr>
@@ -71,7 +71,9 @@
         <td><%= link_to item.name, item %></td>
         <td><%= item.medium %></td>
         <td><%= item.platform %></td>
-        <td><%= link_to 'Borrow', nil %></td>
+        <% if user_signed_in? %>
+          <td><%= link_to 'Borrow', item_borrow_path(item) %></td>
+        <% end %>
       </tr>
     <% end %>
   </tbody>

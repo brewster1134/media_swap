@@ -12,9 +12,9 @@ class Borrow
   index({ lender: 1 })
   index({ borrower: 1 })
 
-  validates :item, uniqueness: true
-  validates :lender, uniqueness: true
-  validates :borrower, uniqueness: true
+  validates :item, presence: true
+  validates :lender, presence: true
+  validates :borrower, presence: true
   validate :minimum, on: :create
   def minimum
     if borrower.items.where(medium: item.medium).count < 1

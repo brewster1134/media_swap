@@ -42,7 +42,25 @@ class ItemsController < ApplicationController
 
   def destroy
     @item.destroy
-    redirect_to items_url, notice: 'Item was successfully destroyed.'
+    redirect_to items_path, notice: 'Item was successfully destroyed.'
+  end
+
+  # set returned at
+  def return
+    skip_authorization
+    @item = policy_scope(Item).find(params[:item_id])
+    borrow = @item.current_borrow
+    borrow.returned_at = Time.now
+    borrow.save!
+    redirect_to root_path, notice: 'Item was successfully returned.'
+  end
+
+  # send email to lender
+  def borrow
+    skip_authorization
+    @item = policy_scope(Item).find(params[:item_id])
+    Borrow.create! item: @item, lender: @item.user, borrower: current_user
+    redirect_to root_path, notice: 'Item was successfully borrowed.'
   end
 
   private
