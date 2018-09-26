@@ -58,9 +58,16 @@ class ItemsController < ApplicationController
   # send email to lender
   def borrow
     skip_authorization
-    @item = policy_scope(Item).find(params[:item_id])
-    Borrow.create! item: @item, lender: @item.user, borrower: current_user
-    redirect_to root_path, notice: 'Item was successfully borrowed.'
+    @item = Item.find(params[:item_id])
+
+    if current_user.items.where(medium: @item.medium).count < 1
+      redirect_to root_path, alert: "You have to list a #{@item.medium} before borrowing one"
+    elsif current_user.current_borrows.any? { |item| item.medium == @item.medium }
+      redirect_to root_path, alert: "You can only borrow 1 #{@item.medium} at a time"
+    else
+      Borrow.create! item: @item, lender: @item.user, borrower: current_user
+      redirect_to root_path, notice: 'Item was successfully borrowed.'
+    end
   end
 
   private

@@ -15,12 +15,6 @@ class Borrow
   validates :item, presence: true
   validates :lender, presence: true
   validates :borrower, presence: true
-  validate :minimum, on: :create
-  def minimum
-    if borrower.items.where(medium: item.medium).count < 1
-      errors.add "You have to list a #{item.medium} before borrowing one"
-    end
-  end
 
   def returned?
     !!self.returned_at
