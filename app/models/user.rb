@@ -24,6 +24,7 @@ class User
   index({ email: 1 }, { unique: true })
 
   validates :email, uniqueness: true
+  validates :email, format: { with: /@akqa\.com\z/, message: 'you must use your akqa.com email' }
 
   def admin?
     self == User.first

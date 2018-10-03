@@ -18,7 +18,7 @@
           <td><%= item.platform %></td>
           <td>
             <% if item.current_borrow %>
-              <%= item.current_borrow.borrower.email %>
+              <%= mail_to item.current_borrow.borrower.email %>
               (<%= time_ago_in_words(item.current_borrow.created_at) %> ago)
               <%= link_to 'Mark as Returned', item_return_path(item) %>
             <% end %>
@@ -46,7 +46,7 @@
           <td><%= item.medium %></td>
           <td><%= item.platform %></td>
           <td>
-            <%= item.current_borrow.lender.email %>
+            <%= mail_to item.current_borrow.lender.email %>
             (<%= time_ago_in_words(item.current_borrow.created_at) %> ago)
           </td>
         </tr>

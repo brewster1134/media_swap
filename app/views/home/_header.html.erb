@@ -1,9 +1,14 @@
-<%= link_to 'Home', root_path %>
-<% if user_signed_in? %>
-  <%= current_user.email %>
-  <%= link_to 'Manage items', items_path %>
-  <%= link_to 'Log Out', destroy_user_session_path %>
-<% else %>
-  <%= link_to 'Log In', new_user_session_path %>
-  <%= link_to 'Register', new_user_registration_path %>
-<% end %>
+<div id='header'>
+  <div id='header__home'><%= link_to 'Home', root_path %></div>
+  <div id='header__user'>
+    <% if user_signed_in? %>
+      <%= current_user.email %>
+      <%= link_to 'Log Out', destroy_user_session_path %>
+      <br />
+      <%= link_to 'Manage items', items_path %>
+    <% else %>
+      <%= link_to 'Log In', new_user_session_path %>
+      <%= link_to 'Register', new_user_registration_path %>
+    <% end %>
+  </div>
+</div>

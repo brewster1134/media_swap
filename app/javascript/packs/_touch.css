@@ -1,0 +1,26 @@
+html.touch body {
+  font-size: 1.2em
+}
+
+html.touch body a {
+  background-color: #f9f9f9;
+  text-decoration: none;
+  display: inline-block;
+  border: 0.1em solid;
+  padding: 0.8em;
+  margin: 0.2em;
+}
+
+html.touch body a:hover {
+  background-color: #e9e9e9;
+  color: inherit;
+}
+
+html.touch body table {
+  width: 100%;
+}
+
+html.touch body table th,
+html.touch body table td {
+  text-align: center;
+}

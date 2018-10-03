@@ -1,1 +1,11 @@
-@import 'scaffold.css';
+@import '_scaffold.css';
+@import '_touch.css';
+
+#header {
+  display: flex;
+}
+
+#header #header__user{
+  text-align: right;
+  width: 100%;
+}
